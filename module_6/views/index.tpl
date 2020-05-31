@@ -12,19 +12,25 @@
                 <li>
                     <div class="chekbox-two">
                         <label class="checkbox">
-                            <input type="checkbox">
+                            % if task.is_completed:
+                            <input type="checkbox" class="checkbox_true" data-uid="{{ task.uid }}"
+                            disabled='disabled' checked='checked'>
                             <span class="checkbox__icon"></span>
-                            {{ task }}
+                            % else:
+                            <input type="checkbox" class="checkbox_true" data-uid="{{ task.uid }}">
+                            <span class="checkbox__icon"></span>
+                            % end
+                            <span class="task_text">{{ task }}</span>
                         </label>
+                        <a href="#" class="remove">X</a>
+                        <hr/>
                     </div>
-                    <a href="#" class="remove">X</a>
-                    <hr/>
                 </li>
             % end
             </ul>
             <br/>
-            <form id="todo-add">
-                <input type="text" class="form-control"/>
+            <form action="/add-task" method="post" id="todo-add">
+                <input type="text" name="description" class="form-control"/>
                 <button class="add" type="submit">+</button>
             </form>
         </div>
